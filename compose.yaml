@@ -1,0 +1,29 @@
+services:
+  twitch_app_container:
+    build:
+      context: .
+      dockerfile: ./docker/bun/Dockerfile
+    container_name: twitch_app_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+  twitch_mysql8_container:
+    build:
+      context: .
+      dockerfile: ./docker/database/Dockerfile
+    env_file: ./docker/database/db_env_file
+    container_name: twitch_mysql8_container
+    volumes:
+      - twitch_db_mysql8:/var/lib/mysql
+      - ./docker/database/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./backend/migrations/schema:/docker-entrypoint-initdb.d
+      - ./backend/migrations/schema:/etc/ddl
+      - ./docker/database/logs:/var/log/mysql
+    ports:
+      - 3306:3306
+    links:
+      - twitch_app_container
+volumes:
+  twitch_db_mysql8:
+    name: twitch_db_mysql8
