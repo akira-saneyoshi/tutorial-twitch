@@ -1,0 +1,1 @@
+create database twitch_app;
