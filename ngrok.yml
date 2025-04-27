@@ -1,0 +1,7 @@
+version: "2"
+authtoken: "2wGnSlxndw4hFSnIusicdVpBge2_5tNFCYnN5aP5tJQVhhDfM"
+tunnels:
+  twitch_app:
+    proto: http
+    addr: twitch_app_container:3000 #ここに接続したいサービス
+    host_header: rewrite

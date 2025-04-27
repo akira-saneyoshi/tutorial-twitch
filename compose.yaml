@@ -24,6 +24,18 @@ services:
       - 3306:3306
     links:
       - twitch_app_container
+  twitch_ngrok:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    ports:
+      - 4040:4040
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
 volumes:
   twitch_db_mysql8:
     name: twitch_db_mysql8
