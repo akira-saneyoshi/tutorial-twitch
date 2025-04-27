@@ -4,4 +4,5 @@ tunnels:
   twitch_app:
     proto: http
     addr: twitch_app_container:3000 #ここに接続したいサービス
-    host_header: rewrite
+    # host_header: rewrite
+    domain: apt-game-bluegill.ngrok-free.app
